@@ -1,0 +1,1 @@
+alter table sys_user add column email varchar(255)

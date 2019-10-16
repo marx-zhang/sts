@@ -1,0 +1,58 @@
+version: '3'
+services:
+  lb-nginx:
+    container_name: lb-nginx
+    build:
+      context: ./
+      dockerfile: ./lb_docker/lb_nginx/nginx_Dockerfile
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "80:80"
+    volumes:
+      - ~/.lb/logs/nginx:/var/log/nginx
+    depends_on:
+      - lb-sys
+      - lb-admin
+
+  lb-mysql:
+    container_name: lb_mysql
+    build:
+      context: ./
+      dockerfile: ./lb_docker/lb_mysql/lb_mysql_Dockerfile
+    environment:
+      MYSQL_DATABASE: lb
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: '%'
+      TZ: Asia/Shanghai
+    expose:
+      - "3306"
+    volumes:
+      - ~/.lb/mysql/mysql_data:/var/lib/mysql
+    restart: always
+
+  lb-sys:
+    container_name: lb-sys
+    build:
+      context: ./
+      dockerfile: ./lb_docker/lb_sys_Dockerfile
+    working_dir: /app
+    environment:
+      TZ: Asia/Shanghai
+    volumes:
+      - ~/.m2:/root/.m2
+    expose:
+      - "9090"
+    command: mvn clean spring-boot:run -Dspring-boot.run.profiles=docker -Dmaven.test.skip=true
+    depends_on:
+      - lb-mysql
+
+  lb-admin:
+    container_name: lb-admin
+    build:
+      context: ./
+      dockerfile: ./lb_docker/lb_admin/lb_admin_Dockerfile
+    environment:
+      TZ: Asia/Shanghai
+    expose:
+      - "3001"
