@@ -1,8 +1,7 @@
 server:
   port: 9090
   servlet:
-    context-path: /
-
+    context-path: /media
 spring:
   rabbitmq:
     host: lb-rabbitmq

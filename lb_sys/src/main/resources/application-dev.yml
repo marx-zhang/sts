@@ -3,17 +3,17 @@ server:
   servlet:
     context-path: /
 spring:
-#  rabbitmq:
-#    host: lb-rabitmq
-#    port: 5672
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
   datasource:
 
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
     druid:
-      url: jdbc:mysql://localhost:3306/lb_sts?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT
+      url: jdbc:mysql://localhost:3306/lb?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT
       username: root
-      password: bvvy288
+      password: root
       #url: jdbc:mysql://127.0.0.1:3306/limetest?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
       #username: root
       #password: 123456

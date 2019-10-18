@@ -17,19 +17,28 @@ services:
 
   lb-mysql:
     container_name: lb_mysql
-    build:
-      context: ./
-      dockerfile: ./lb_docker/lb_mysql/lb_mysql_Dockerfile
+    image: mysql/mysql-server:5.7
     environment:
       MYSQL_DATABASE: lb
       MYSQL_ROOT_PASSWORD: root
       MYSQL_ROOT_HOST: '%'
       TZ: Asia/Shanghai
-    expose:
-      - "3306"
-    volumes:
-      - ~/.lb/mysql/mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
     restart: always
+#    build:
+#      context: ./
+#      dockerfile: ./lb_docker/lb_mysql/lb_mysql_Dockerfile
+#    environment:
+#      MYSQL_DATABASE: lb
+#      MYSQL_ROOT_PASSWORD: root
+#      MYSQL_ROOT_HOST: '%'
+#      TZ: Asia/Shanghai
+#    expose:
+#      - "3306"
+#    volumes:
+#      - ~/.lb/mysql/mysql_data:/var/lib/mysql
+#    restart: always
 
   lb-sys:
     container_name: lb-sys
@@ -56,3 +65,13 @@ services:
       TZ: Asia/Shanghai
     expose:
       - "3001"
+  lb-rabbitmq:
+    image: "rabbitmq:management"
+#    hostname: "rabbit"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    labels:
+      NAME: "rabbitmq"
+    volumes:
+      - ./lb_docker/rabbitmq-isolated.conf:/etc/rabbitmq/rabbitmq.config
