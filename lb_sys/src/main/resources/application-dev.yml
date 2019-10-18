@@ -3,7 +3,11 @@ server:
   servlet:
     context-path: /
 spring:
+#  rabbitmq:
+#    host: lb-rabitmq
+#    port: 5672
   datasource:
+
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
     druid:

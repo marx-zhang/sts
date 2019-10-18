@@ -28,10 +28,10 @@ public class ExceptionHandlers {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Errors> notValid(MethodArgumentNotValidException e) {
         BindingResult bindingResult = e.getBindingResult();
-        List<Error> errorList =  bindingResult.getAllErrors().stream()
+        List<Error> errorList = bindingResult.getAllErrors().stream()
                 .map(error -> {
                     if (error instanceof FieldError) {
-                       return new Error(error.getObjectName(), ((FieldError) error).getField(), error.getCode());
+                        return new Error(error.getObjectName(), ((FieldError) error).getField(), error.getCode());
                     } else {
                         return new Error(error.getObjectName(), "none", error.getCode());
                     }
@@ -39,9 +39,6 @@ public class ExceptionHandlers {
         val errors = new Errors("Validation Failed", errorList);
         return ResponseEntity.unprocessableEntity().body(errors);
     }
-
-
-
 
 
 }
