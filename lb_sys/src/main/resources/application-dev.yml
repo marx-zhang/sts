@@ -4,14 +4,14 @@ server:
     context-path: /
 spring:
   rabbitmq:
-    host: 127.0.0.1
+    host: 127.0.0.1 #rabbitmq 主机ip
     port: 5672
   datasource:
 
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
     druid:
-      url: jdbc:mysql://localhost:3306/lb?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT
+      url: jdbc:mysql://localhost:3306/lb?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT&allowPublicKeyRetrieval=true
       username: root
       password: root
       #url: jdbc:mysql://127.0.0.1:3306/limetest?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
@@ -34,6 +34,7 @@ spring:
         url-pattern: /druid/*
         login-username: admin
         login-password: admin
+        allow:
       filter:
         stat:
           log-slow-sql: true

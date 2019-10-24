@@ -13,7 +13,7 @@ public class RabbitMqReceiver {
     @RabbitListener(queues = RabbitConfig.HELLO_WORLD_QUEUE)
     public void receiveHelloWorld(String message) {
 
-        log.info("从hello world队列获取到消息为：" + message);
+        log.info("从队列获取到消息为：" + message);
 
     }
 }
