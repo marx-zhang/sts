@@ -54,7 +54,7 @@ services:
       - ~/.m2:/root/.m2
       - ./lb_sys:/app/lb_sys
       - ./pom.xml:/app/pom.xml
-#      - ~/.sts/logs/server:/app/log
+#      - ~/.sts/logs/server:/app/log #log?
       - ~/.sts/upload:/root/.sts/upload #挂载文件服务
     expose:
       - "9090"
